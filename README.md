@@ -2,7 +2,7 @@
 Debian で ifupdown によるネットワーク構成で、全てのインターフェースを待つスクリプト
 
 ## モチベーション
-Debianが、マルチホーム環境においてnetwork-online.targetによる待機が上手く動かないことがある。
+マルチホーム環境のDebianにおいて、network-online.targetによる待機が上手く動かないことがある。
 
 DebianのSystemdではネットワークインターフェースのコンフィギュレーションを待機するためには、 network-online.target を UnitセクションのAfter に書いておく
 ```
