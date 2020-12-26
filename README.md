@@ -52,9 +52,10 @@ WantedBy=network-online.target
 この方法は WAIT_ONLINE_METHOD で指定出来る 
 
 |WAIT_ONLINE_METHOD| 内容 |
+----|---- 
 |route             |デフォルトルートが指定されているかどうかを確認する。|
 |ping / ping6      |```WAIT_ONLINE_ADDRESS``` に指定されているアドレスに ping を投げるのだが、これはワンショットなので問題外。待たない。|
-|ifup iface interface| この方法は```/etc/network/interfaces```に書かれている内容を ifquery を使用して、取ってくる。
+|ifup iface interface| この方法は```/etc/network/interfaces```に書かれている内容を ifquery を使用して、取ってくる。|
 
 * ```auto eth0``` 等 auto で指定しているインターフェースに関しては全てのインターフェースが上がっている
 * ```hot-plug ``` で指定されているインターフェースに関しては、いずれか一つ以上
