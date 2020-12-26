@@ -49,23 +49,19 @@ WantedBy=network-online.target
 設定ファイルは ```/etc/default/networking``` で変数のオーバーライドをしている。
 そして、いくつかの方法でインターフェースの立ち上がりを確認する方法を提供している。
 
-この方法は WAIT_ONLINE_METHID で指定出来る 
+この方法は WAIT_ONLINE_METHOD で指定出来る 
 
-### route
-デフォルトルートが指定されているかどうかを確認する。
-
-### ping / ping6
-```WAIT_ONLINE_ADDRESS``` に指定されているアドレスに ping を投げるのだが、これはワンショットなので問題外。待たない。
-
-### ifup iface interface
- この方法は```/etc/network/interfaces```に書かれている内容を ifquery を使用して、取ってくる。
+|WAIT_ONLINE_METHOD| 内容 |
+|route             |デフォルトルートが指定されているかどうかを確認する。|
+|ping / ping6      |```WAIT_ONLINE_ADDRESS``` に指定されているアドレスに ping を投げるのだが、これはワンショットなので問題外。待たない。|
+|ifup iface interface| この方法は```/etc/network/interfaces```に書かれている内容を ifquery を使用して、取ってくる。
 
 * ```auto eth0``` 等 auto で指定しているインターフェースに関しては全てのインターフェースが上がっている
 * ```hot-plug ``` で指定されているインターフェースに関しては、いずれか一つ以上
 * ```WAIT_ONLINE_IFACE``` でインターフェースが指定されているときには、いずれか 一つ以上
 
 ただし、これは ifup が実行されたのみであって、IPアドレスが割り当てられた ということを意味しない。
-（これは、無線LANのように インターフェースが存在して linkup している ような状況を想定していると考える）
+（これは、無線LANのように インターフェースが存在して linkup している ような状況を想定していると考える）|
 
 というように、マルチホーム環境のサーバ機で使うには大変不安定になるので、本スクリプトを書き下ろした。
 
@@ -77,8 +73,8 @@ ifquery --list と、 変数 ADDTIONAL_DEVICES に列挙したインターフェ
 
 - 実際にデバイスが存在するか？ ip link show で確認
 - ip addr show でアドレスが存在するか確認
--- WITHOUT_INET4_DEVICE に列挙したインターフェースは、 IPv4 アドレスが割り当てられる必要は無い
--- WITHOUT_INET6_DEVICE に列挙したインターフェースは、 IPv6 アドレスが割り当てられる必要は無い
+ - WITHOUT_INET4_DEVICE に列挙したインターフェースは、 IPv4 アドレスが割り当てられる必要は無い
+ - WITHOUT_INET6_DEVICE に列挙したインターフェースは、 IPv6 アドレスが割り当てられる必要は無い
 
 WITHOUT_INET6_DEVICE があるのは、 IPoE(IPv4 over IPv6 , ipip6) のインターフェースに対応させるため。
 特に今回の IPv4 over IPv6 のトンネルインターフェースは、IPv6 のネットワークコンフィギュレーションが終わって
