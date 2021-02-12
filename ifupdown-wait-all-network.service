@@ -1,6 +1,7 @@
 [Unit]
 Description=Wait for All network to be configured by ifupdown
 DefaultDependencies=no
+After=network.target
 Before=network-online.target
 ConditionFileIsExecutable=/sbin/ifup
 
