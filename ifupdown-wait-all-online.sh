@@ -27,6 +27,20 @@ for timeout in 0 3 12 15 30 60 60; do
                 if [ -z "$(/usr/sbin/ip -family inet6 -oneline address show dev $dev scope global)" ] ; then
                     status=false;
                 fi
+
+                # DAD check
+                # @see https://serverfault.com/questions/638442/lighttpd-does-not-start-at-boot-after-enabling-ipv6
+                for attempt in $(seq 1 10); do
+                    if [ -z "$(/usr/sbin/ip -family inet6 -oneline address show dev $dev scope global tentative)" ] ; then
+                        break;
+                    fi
+                    /usr/bin/sleep 0.3
+                done
+
+                if [ -n "$(/usr/sbin/ip -family inet6 -oneline address show dev $dev scope global tentative)" ] ; then
+                    status=false;
+                fi
+                
             fi
         fi
     done
