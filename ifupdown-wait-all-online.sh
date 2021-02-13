@@ -9,7 +9,7 @@ WITHOUT_INET6_DEVICE="tun0 tun1 tun2"
 [ -f /etc/default/networking ] && . /etc/default/networking
 
 status=true;
-for timeout in 0 3 12 15 30 60 60; do 
+for timeout in 0 1 2 3 3 6 15 30 60 60; do 
     status=true;
     for dev in $(/sbin/ifquery --list -X lo -X '*:*') ${ADDTIONAL_DEVICES} ; do
         ipdev=$(/usr/sbin/ip -oneline link show | /usr/bin/awk '{sub(/(@.*)?:$/ ,"", $2); print $2;}' )
