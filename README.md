@@ -98,3 +98,17 @@ Before=network-online.target
 で指定されているので、
 network-online.targetがupする事を、ifupdown-wait-all-network.service がupするまで遅延させる。
 （ifupdown-wait-online.service と同じ）
+
+### IPv6 wait DAD check について
+IPv6 のIP は割り当て後、Duplicate Address Detection (以下DAD) のチェックが入り
+アドレス重複のチェックが終わるまで bind(2) が失敗する。
+この状態は、ip(1) の出力の tentative フラグで確認することができる。
+
+これは特にマルチホーミング環境でIPv6 を利用するいくつかのアプリケーション
+（例えば ntpd, squid, bind, nginx 等）が明示的にIPv6 アドレスを
+listen しようとするときに、このDADチェックがまだ実行中という理由で
+bind(2) が失敗する場合がある。
+
+本スクリプトでは、このDADチェック中のアドレスの解決が終了するまで、network-online.target を遅延させる。
+
+- [参考](https://serverfault.com/questions/638442/lighttpd-does-not-start-at-boot-after-enabling-ipv6)
