@@ -2,9 +2,9 @@
 set -e 
 
 PATH=/usr/bin:/bin
-ADDTIONAL_DEVICES="tun0 tun1 tun2"
+ADDTIONAL_DEVICES=""
 WITHOUT_INET4_DEVICE=""
-WITHOUT_INET6_DEVICE="tun0 tun1 tun2"
+WITHOUT_INET6_DEVICE="eth1"
 
 [ -f /etc/default/networking ] && . /etc/default/networking
 
@@ -17,6 +17,7 @@ for timeout in 0 1 2 3 3 6 15 30 60 60; do
             # device not found
             status=false;
         else
+
             if [ -z "$(echo ${WITHOUT_INET4_DEVICE} | grep ${dev})" ] ; then
                 if [ -z "$(/usr/sbin/ip -family inet -oneline address show dev $dev scope global)" ] ; then
                     status=false;
@@ -40,7 +41,6 @@ for timeout in 0 1 2 3 3 6 15 30 60 60; do
                 if [ -n "$(/usr/sbin/ip -family inet6 -oneline address show dev $dev scope global tentative)" ] ; then
                     status=false;
                 fi
-                
             fi
         fi
     done
