@@ -7,7 +7,7 @@ ConditionFileIsExecutable=/sbin/ifup
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/sbin/ifupdown-wait-all-online.sh
+ExecStart=/usr/lib/ifupdown/ifupdown-wait-all-online.sh
 RemainAfterExit=yes
 
 [Install]
