@@ -1,0 +1,7 @@
+Package: ifupdown-wait-all-online
+Maintainer: TOGURO Mikito <mit@shalab.net>
+Architecture: any
+Depends: ifupdown, iproute2
+Version: 0.0.1-1
+Description: ifupwn add-on script for waiting all interface online for IPv6/IPv4 
+ simple wait all network interface! 
