@@ -1,6 +1,13 @@
 # ifupdown-wait-all-network-online-service
 Debian で ifupdown によるネットワーク構成で、全てのインターフェースを待つスクリプト
 
+## How to install
+```
+make deb-package
+```
+で、.deb Debianのパッケージが出来上がるのでそれをインストールする。
+
+
 ## モチベーション
 マルチホーム環境のDebianにおいて、network-online.targetによる待機が上手く動かないことがある。
 
