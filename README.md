@@ -11,6 +11,10 @@ make deb-package
 ## モチベーション
 マルチホーム環境のDebianにおいて、network-online.targetによる待機が上手く動かないことがある。
 
+> IPv6 には、Duplicate Address Detection 通称DAD 重複アドレス検出 が存在していて、IPアドレスの設定が終わったあと、重複アドレス検出が終わるまで tentative 状態 (ip a show で scope に tentative がついた状態）になる。
+> この状態では、アドレスは割り当てられているが、bind(2) に失敗する。これは特定のIPアドレスを指定してbind(2) するサーバが起動に失敗することになる。
+> これは都合が悪いので network-online.target でネットワークがオンラインになるまで待つという設定をするのであるが、インターフェースが複数ある場合やIPv6 アドレスを複数割り当てる環境ではに上手く待機しない場合がある。この事は後述する。
+
 DebianのSystemdではネットワークインターフェースのコンフィギュレーションを待機するためには、 network-online.target を UnitセクションのAfter に書いておく
 ```
 [Unit]
